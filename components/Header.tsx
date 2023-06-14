@@ -11,6 +11,10 @@ function Header() {
                 height={120}
                 className='w-38 pb-10 md:pb-0 object-contain'
             />
+
+            {/* Search box */}
+
+            {/* Avatar*/}
         </header>
     )
 }
