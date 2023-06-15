@@ -18,7 +18,7 @@ function Header() {
                 />
 
                 {/* Search box */}
-                <div className="flex ">
+                <div className="flex items-center space-x-5 flex-1 justify-end w-full ">
                     <form className="flex items-center space-x-5 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial">
                         <MagnifyingGlassIcon className="h-6 w-6 text-grey-400" />
                         <input
@@ -30,6 +30,8 @@ function Header() {
                             search
                         </button>
                     </form>
+
+                    <Avatar name='Marco Acciarri' round size="50" />
                 </div>
             </div>
         </header >
