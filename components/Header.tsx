@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image'
 import React from 'react'
 import { MagnifyingGlassIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import Avatar from 'react-avatar'
 
 function Header() {
     return (
