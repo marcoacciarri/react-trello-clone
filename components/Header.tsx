@@ -9,6 +9,9 @@ function Header() {
     return (
         <header>
             <div className="flex flex-col md:flex-col items-center p-5 bg-gray500/10 rounded-b-2xl" >
+                <div className="absolute top-0 left-0 w-100 h-96 bg-gradient-to-br from-pink-400 to-blue-400 filter 
+                blur-3xl opacity-50 -z-50 " />
+
                 <Image
                     src="https://yourzone.website/wp-content/uploads/2021/07/favicon-120x120.png"
                     alt="Trello clone"
@@ -36,7 +39,7 @@ function Header() {
             </div>
 
             <div className="flex items-center justify-center px-5 md:py-5 ">
-                <p className="flex  items-center text-sm pr-5 shadow-xl rounded-xl w-fit italic max-w-3xl">
+                <p className="flex items-center text-sm pr-5 shadow-xl rounded-xl w-fit italic max-w-3xl">
                     <UserCircleIcon className="inline-block h-10 w-10 mr-1" />
                     GPT is summarizing your day...
                 </p>
