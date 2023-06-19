@@ -4,7 +4,7 @@ const client = new Client();
 
 client
     .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
+    .setProject('648b1e01515efcc526ab');
 
 const account = new Account(client);
 const databases = new Databases(client);
