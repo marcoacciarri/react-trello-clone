@@ -1,3 +1,4 @@
+
 interface Board {
     columns: Map<TypeColumn, Column>
 }
