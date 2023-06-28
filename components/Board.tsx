@@ -34,7 +34,12 @@ function Board() {
                         ref={provided.innerRef}
                     >
                         {Array.from(board.columns.entries()).map(([id, column], index) => (
-                            <Column />
+                            <Column
+                                key={id}
+                                id={id}
+                                todo={column.todos}
+                                index={index}
+                            />
                         ))}
 
                     </div>
