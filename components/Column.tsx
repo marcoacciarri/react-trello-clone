@@ -1,6 +1,7 @@
 import { PlusCircleIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
+import TodoCard from './TodoCard'
 
 type Props = {
     id: TypedColumn,
@@ -49,7 +50,14 @@ function Column({ id, todos, index }: Props) {
                                             index={index}
                                         >
                                             {(provided) => (
-                                                <div>{todo.title}</div>
+                                                <TodoCard
+                                                    todo={todo}
+                                                    index={index}
+                                                    id={id}
+                                                    innerRef={provided.innerRef}
+                                                    draggableProps={provided.draggableProps}
+                                                    dragHandleProps={provided.dragHandleProps}
+                                                />
                                             )}
                                         </Draggable>
                                     ))}
