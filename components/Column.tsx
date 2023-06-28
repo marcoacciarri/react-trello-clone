@@ -19,7 +19,10 @@ function Column({ id, todos, index }: Props) {
                     {/* render draggable todos in column */}
                     <Droppable droppableId={index.toString()} type="card" >
                         {(provided, snapshot) => (
-                            <div></div>
+                            <div
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                            ></div>
                         )}
                     </Droppable>
 
