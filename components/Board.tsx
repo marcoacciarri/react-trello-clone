@@ -4,6 +4,7 @@ import { useBoardStore } from '@/store/BoardStore'
 import React from 'react'
 import { useEffect } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { isNamedExports } from 'typescript'
 
 function Board() {
     //const getBoard = useBoardStore((state) => state.getBoard)
@@ -24,7 +25,13 @@ function Board() {
         <DragDropContext>
             <Droppable droppableId="" direction="horizontal" type="column">
                 {(provided) => (
-                    <div>{/* rendering columns*/}</div>
+                    <div
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                    >{
+                            /* rendering columns*/
+
+                        }</div>
                 )}
             </Droppable>
         </DragDropContext>
