@@ -10,7 +10,7 @@ type Props = {
 
 function Column(id, todos, index: Props) {
     return (
-        <Draggable>
+        <Draggable draggableId={id} index={index} >
             {(provided) => (
                 <div
                     {...provided.draggableProps}
