@@ -22,7 +22,28 @@ function Board() {
 
     // necessary function for DragDropContext that returns a DropResult
     const handleOnDragEnd = (result: DropResult) => {
+        const { destination, source, type } = result
 
+        if (!destination) return;
+
+        //Handle column drag
+        if (type === 'column') {
+            // get columns in board
+            const entries = Array.from(board.columns.entries());
+
+            //remove source column from entries and save in removed
+            const [removed] = entries.splice(source.index, 1);
+
+            //push removed item into the destination column
+            entries.splice(destination.index, 0, removed);
+
+            //update board state with new column result
+            const rearrangedColumns = new Map(entries);
+            setBoardState({
+                ...board,
+                columns: rearrangedColumns,
+            })
+        }
     }
 
     return (
