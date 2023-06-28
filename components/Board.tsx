@@ -21,14 +21,13 @@ function Board() {
     console.log(board)
 
     return (
-        <h1>hello</h1>
-        // <DragDropContext>
-        //     <Droppable droppableId="" direction="horizontal" type="column">
-        //         {(provided) => (
-        //             <div>{/* rendering columns*/}</div>
-        //         )}
-        //     </Droppable>
-        // </DragDropContext>
+        <DragDropContext>
+            <Droppable droppableId="" direction="horizontal" type="column">
+                {(provided) => (
+                    <div>{/* rendering columns*/}</div>
+                )}
+            </Droppable>
+        </DragDropContext>
     )
 }
 
