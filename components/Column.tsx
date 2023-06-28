@@ -7,6 +7,14 @@ type Props = {
     index: number,
 }
 
+const idToColumnText: {
+    [key in TypedColumn]: string
+} = {
+    "todo": "Todo",
+    "inprogress": "In Progress",
+    "done": "Done",
+}
+
 function Column({ id, todos, index }: Props) {
     return (
         <Draggable draggableId={id} index={index} >
@@ -24,7 +32,9 @@ function Column({ id, todos, index }: Props) {
                                     }`}
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
-                            ></div>
+                            >
+                                <h1>{idToColumnText[id]}</h1>
+                            </div>
                         )}
                     </Droppable>
 
