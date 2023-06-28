@@ -52,6 +52,8 @@ function Column({ id, todos, index }: Props) {
                                             )}
                                         </Draggable>
                                     ))}
+
+                                    {provided.placeholder}
                                 </div>
                             </div>
                         )}
