@@ -10,9 +10,10 @@ function Board() {
     //const getBoard = useBoardStore((state) => state.getBoard)
     //const board = useBoardStore((state) => state.board)
 
-    const [board, getBoard] = useBoardStore((state) => [
+    const [board, getBoard, setBoardState] = useBoardStore((state) => [
         state.board,
-        state.getBoard
+        state.getBoard,
+        state.setBoardState,
     ])
 
     useEffect(() => {
