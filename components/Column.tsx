@@ -33,7 +33,12 @@ function Column({ id, todos, index }: Props) {
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                             >
-                                <h1>{idToColumnText[id]}</h1>
+                                <h1 className='flex justify-between align-center font-bold text-xl p2 '>
+                                    {idToColumnText[id]}
+                                    <span className='text-grey-500 bg-gray-200 rounded-full px-2 py-1 text-small font-normal '>
+                                        {todos.length}
+                                    </span>
+                                </h1>
                             </div>
                         )}
                     </Droppable>

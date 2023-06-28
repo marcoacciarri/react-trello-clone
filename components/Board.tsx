@@ -37,7 +37,7 @@ function Board() {
                             <Column
                                 key={id}
                                 id={id}
-                                todo={column.todos}
+                                todos={column.todos}
                                 index={index}
                             />
                         ))}
