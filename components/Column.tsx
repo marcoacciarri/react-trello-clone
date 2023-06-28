@@ -1,14 +1,13 @@
 import React from 'react'
-import { Draggable } from 'react-beautiful-dnd'
+import { Draggable, Droppable } from 'react-beautiful-dnd'
 
 type Props = {
     id: TypedColumn,
     todos: Todo[],
-    index: number
-
+    index: number,
 }
 
-function Column(id, todos, index: Props) {
+function Column({ id, todos, index }: Props) {
     return (
         <Draggable draggableId={id} index={index} >
             {(provided) => (
@@ -18,7 +17,12 @@ function Column(id, todos, index: Props) {
                     ref={provided.innerRef}
                 >
                     {/* render draggable todos in column */}
-                    todos
+                    <Droppable droppableId={index.toString()} type="card" >
+                        {(provided, snapshot) => (
+                            <div></div>
+                        )}
+                    </Droppable>
+
                 </div>
             )}
         </Draggable>
