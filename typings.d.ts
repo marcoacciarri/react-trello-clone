@@ -7,7 +7,7 @@ type TypedColumn = "todo" | "inprogress" | "done"
 
 interface Column {
     id: TypeColumn,
-    todo: Todo[]
+    todos: Todo[]
 }
 
 interface Todo {

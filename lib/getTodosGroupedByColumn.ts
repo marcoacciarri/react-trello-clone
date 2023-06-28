@@ -27,7 +27,7 @@ export const getTodosGroupedByColumn = async () => {
         })
 
         return acc
-    }, new Map<TypedColumn, Column>);
+    }, new Map<TypedColumn, Column>());
 
     // create column if it doesn't exist
     const columnTypes: TypedColumn[] = ['todo', 'inprogress', 'done']
