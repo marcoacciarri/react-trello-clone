@@ -12,7 +12,11 @@ function Column(id, todos, index: Props) {
     return (
         <Draggable>
             {(provided) => (
-                <div>
+                <div
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
+                >
                     {/* render draggable todos in column */}
                     todos
                 </div>
