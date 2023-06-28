@@ -4,6 +4,7 @@ import { useBoardStore } from '@/store/BoardStore'
 import React from 'react'
 import { useEffect } from 'react'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
+import Column from './Column'
 
 function Board() {
     //const getBoard = useBoardStore((state) => state.getBoard)
@@ -33,7 +34,7 @@ function Board() {
                         ref={provided.innerRef}
                     >
                         {Array.from(board.columns.entries()).map(([id, column], index) => (
-                            <p>columns</p>
+                            <Column />
                         ))}
 
                     </div>
