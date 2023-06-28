@@ -20,6 +20,8 @@ function Column({ id, todos, index }: Props) {
                     <Droppable droppableId={index.toString()} type="card" >
                         {(provided, snapshot) => (
                             <div
+                                className={`p-2 rounded-2xl shadow-sm ${snapshot.isDraggingOver ? 'bg-green-200/' : 'bg-white/50'
+                                    }`}
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                             ></div>
