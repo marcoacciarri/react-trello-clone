@@ -39,6 +39,20 @@ function Column({ id, todos, index }: Props) {
                                         {todos.length}
                                     </span>
                                 </h1>
+
+                                <div className='space-y-2 '>
+                                    {todos.map((todo, map) => (
+                                        <Draggable
+                                            key={todo.$id}
+                                            draggableId={todo.$id}
+                                            index={index}
+                                        >
+                                            {(provided) => (
+                                                <div>{todo.title}</div>
+                                            )}
+                                        </Draggable>
+                                    ))}
+                                </div>
                             </div>
                         )}
                     </Droppable>
