@@ -4,6 +4,7 @@ import { useBoardStore } from '@/store/BoardStore'
 import React from 'react'
 import { useEffect } from 'react'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
+import { start } from 'repl'
 import Column from './Column'
 
 function Board() {
@@ -22,11 +23,14 @@ function Board() {
 
     // necessary function for DragDropContext that returns a DropResult
     const handleOnDragEnd = (result: DropResult) => {
-        const { destination, source, type } = result
+        const { destination, source, type } = result;
+
+        console.log(destination, 'destination');
+        console.log(source, 'source');
 
         if (!destination) return;
 
-        //Handle column drag
+        /* Handle column drag */
         if (type === 'column') {
             // get columns in board
             const entries = Array.from(board.columns.entries());
@@ -43,6 +47,79 @@ function Board() {
                 ...board,
                 columns: rearrangedColumns,
             })
+        }
+
+        /* Handle todo drag */
+        const columns = Array.from(board.columns);
+
+        // get start column
+        const startColIndex = columns[Number(source.droppableId)];
+        const startCol: Column = {
+            id: startColIndex[0],
+            todos: startColIndex[1].todos
+        }
+
+        // get end column
+        const endColIndex = columns[Number(destination.droppableId)];
+        const endCol: Column = {
+            id: endColIndex[0],
+            todos: endColIndex[1].todos
+        }
+
+        // protecting
+        if (!startCol || !endCol) return;
+
+        //if drag in same column AND same location
+        if (source.index === destination.index && startCol === endCol) return;
+
+        //get todos of start column to manipulate
+        const newTodos = startCol.todos;
+
+        // get moved todo (and remove from newTodos)
+        const [movedTodo] = newTodos.splice(source.index, 1);
+
+        if (startCol.id === endCol.id) {
+            // if dragging in same column
+
+            // insert movedTodo in new position
+            newTodos.splice(destination.index, 0, movedTodo)
+
+            //create new Column with updated todo order
+            const newCol = {
+                id: startCol.id,
+                todos: newTodos,
+            };
+
+            //copy current columns for manipulating
+            const newColumns = new Map(board.columns);
+
+            //update the old start column with new column ( with the new todos )
+            newColumns.set(startCol.id, newCol)
+
+            // update board state
+            setBoardState({ ...board, columns: newColumns })
+        } else {
+            // dragging to different column
+
+            //get todos of end column and insert movedTodo
+            const endTodos = Array.from(endCol.todos);
+            endTodos.splice(destination.index, 0, movedTodo);
+
+            //copy current columns for manipulating
+            const newColumns = new Map(board.columns);
+
+            //update columns with updated todos
+            newColumns.set(startCol.id, {
+                id: startCol.id,
+                todos: newTodos,
+            });
+
+            newColumns.set(endCol.id, {
+                id: endCol.id,
+                todos: endTodos,
+            });
+
+            setBoardState({ ...board, columns: newColumns })
         }
     }
 
