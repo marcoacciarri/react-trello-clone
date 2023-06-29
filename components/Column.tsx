@@ -43,7 +43,7 @@ function Column({ id, todos, index }: Props) {
                                 </h1>
 
                                 <div className='space-y-2 '>
-                                    {todos.map((todo, map) => (
+                                    {todos.map((todo, index) => (
                                         <Draggable
                                             key={todo.$id}
                                             draggableId={todo.$id}
