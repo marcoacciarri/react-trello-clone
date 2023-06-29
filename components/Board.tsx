@@ -143,6 +143,7 @@ function Board() {
                             />
                         ))}
 
+                        {provided.placeholder}
                     </div>
                 )}
             </Droppable>
