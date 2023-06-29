@@ -46,7 +46,9 @@ function Board() {
             setBoardState({
                 ...board,
                 columns: rearrangedColumns,
-            })
+            });
+
+            return;
         }
 
         /* Handle todo drag */
