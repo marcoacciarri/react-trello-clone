@@ -4,7 +4,6 @@ import { useBoardStore } from '@/store/BoardStore'
 import React from 'react'
 import { useEffect } from 'react'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
-import { start } from 'repl'
 import Column from './Column'
 
 function Board() {
@@ -15,18 +14,15 @@ function Board() {
         state.board,
         state.getBoard,
         state.setBoardState,
-    ])
+    ]);
 
     useEffect(() => {
         getBoard();
-    }, [getBoard])
+    }, [getBoard]);
 
     // necessary function for DragDropContext that returns a DropResult
     const handleOnDragEnd = (result: DropResult) => {
         const { destination, source, type } = result;
-
-        console.log(destination, 'destination');
-        console.log(source, 'source');
 
         if (!destination) return;
 
@@ -96,10 +92,10 @@ function Board() {
             const newColumns = new Map(board.columns);
 
             //update the old start column with new column ( with the new todos )
-            newColumns.set(startCol.id, newCol)
+            newColumns.set(startCol.id, newCol);
 
             // update board state
-            setBoardState({ ...board, columns: newColumns })
+            setBoardState({ ...board, columns: newColumns });
         } else {
             // dragging to different column
 
@@ -121,7 +117,7 @@ function Board() {
                 todos: endTodos,
             });
 
-            setBoardState({ ...board, columns: newColumns })
+            setBoardState({ ...board, columns: newColumns });
         }
     }
 
