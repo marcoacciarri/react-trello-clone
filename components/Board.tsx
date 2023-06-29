@@ -122,7 +122,7 @@ function Board() {
     }
 
     return (
-        <DragDropContext onDragEnd={e => handleOnDragEnd}>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
             <Droppable droppableId="board" direction="horizontal" type="column">
                 {(provided) => (
                     <div
