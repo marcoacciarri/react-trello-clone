@@ -43,7 +43,7 @@ function Column({ id, todos, index }: Props) {
                                 <h1 className='flex justify-between align-center font-bold text-xl p2 '>
                                     {idToColumnText[id]}
                                     <span className='text-grey-500 bg-gray-200 rounded-full px-2 py-1 text-small font-normal '>
-                                        {todos.length}
+                                        {!searchString ? todos.length : todos.filter(todo => todo.title.toLowerCase().includes(searchString.toLowerCase())).length}
                                     </span>
                                 </h1>
 
