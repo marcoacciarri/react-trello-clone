@@ -1,16 +1,34 @@
 'use client';
 
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MagnifyingGlassIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import Avatar from 'react-avatar'
 import { useBoardStore } from '@/store/BoardStore';
+import fetchSuggestion from '@/lib/fetchSuggestion';
 
 function Header() {
-    const [searchString, setSearchString] = useBoardStore((state) => [
+    const [board, searchString, setSearchString] = useBoardStore((state) => [
+        state.board,
         state.searchString,
         state.setSearchString,
     ]);
+
+    const [loading, setLoading] = useState<boolean>(false);
+    const [suggestion, setSuggestion] = useState<string>("");
+
+    useEffect(() => {
+        if (board.columns.size === 0) return;
+        setLoading(true);
+
+        const getSuggestion = async () => {
+            const suggestion = await fetchSuggestion(board);
+            setSuggestion(suggestion);
+            setLoading(false);
+        }
+
+        getSuggestion();
+    }, [board]);
 
     return (
         <header>
