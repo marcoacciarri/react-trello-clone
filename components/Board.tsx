@@ -10,10 +10,11 @@ function Board() {
     //const getBoard = useBoardStore((state) => state.getBoard)
     //const board = useBoardStore((state) => state.board)
 
-    const [board, getBoard, setBoardState] = useBoardStore((state) => [
+    const [board, getBoard, setBoardState, updateTodoInDB] = useBoardStore((state) => [
         state.board,
         state.getBoard,
         state.setBoardState,
+        state.updateTodoInDB
     ]);
 
     useEffect(() => {
@@ -116,6 +117,8 @@ function Board() {
                 id: endCol.id,
                 todos: endTodos,
             });
+
+            updateTodoInDB(movedTodo, endCol.id);
 
             setBoardState({ ...board, columns: newColumns });
         }

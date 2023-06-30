@@ -21,7 +21,6 @@ function TodoCard({ todo, index, id, innerRef, draggableProps, dragHandleProps }
             ref={innerRef}
         >
             <div className='flex justify-between item-center p-5'>
-                <p>{todo.$id}</p>
                 <p>{todo.title}</p>
                 <button className='text-red-500 hover:text-red-600'>
                     <XCircleIcon className='ml-5 h-8 w-8' />
