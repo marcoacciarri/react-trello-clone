@@ -35,7 +35,7 @@ function Header() {
                             placeholder="search"
                             value={searchString}
                             onChange={(e) => setSearchString(e.target.value)}
-                            className="flex-1 outline-none p-2 " />
+                            className="flex-1 outline-none p-2 text-red-500" />
 
                         <button type="submit" hidden>
                             search
