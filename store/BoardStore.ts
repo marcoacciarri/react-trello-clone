@@ -1,6 +1,7 @@
 import { databases } from '@/appwrite';
 import { getTodosGroupedByColumn } from '@/lib/getTodosGroupedByColumn';
 import { data } from 'autoprefixer';
+import { todo } from 'node:test';
 import { create } from 'zustand'
 
 interface BoardState {
@@ -12,7 +13,7 @@ interface BoardState {
   searchString: string;
   setSearchString: (searchString: string) => void;
 
-  deleteTask: (taskIndex: number, todoId: Todo, id: TypedColumn) => void;
+  deleteTask: (taskIndex: number, todo: Todo, id: TypedColumn) => void;
 }
 
 export const useBoardStore = create<BoardState>((set, get) => ({
@@ -39,7 +40,7 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   searchString: "",
   setSearchString: (searchString) => set({ searchString }),
 
-  deleteTask: async (taskIndex: number, todoId: Todo, id: TypedColumn) => {
+  deleteTask: async (taskIndex: number, todo: Todo, id: TypedColumn) => {
     //get copy current state of board
     const newColumns = new Map(get().board.columns);
 
@@ -48,5 +49,9 @@ export const useBoardStore = create<BoardState>((set, get) => ({
 
     //update board
     set({ board: { columns: newColumns } });
+
+    if (todo.image) {
+
+    }
   }
 }));
