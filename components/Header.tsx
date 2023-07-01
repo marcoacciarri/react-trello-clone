@@ -66,8 +66,11 @@ function Header() {
 
             <div className="flex items-center justify-center px-5 md:py-5 ">
                 <p className="flex items-center text-sm pr-5 shadow-xl rounded-xl w-fit italic max-w-3xl">
-                    <UserCircleIcon className="inline-block h-10 w-10 mr-1" />
-                    GPT is summarizing your day...
+                    <UserCircleIcon className={`inline-block h-10 w-10 mr-1 ${loading && "animate-spin"
+                        }`} />
+                    {suggestion && !loading ?
+                        suggestion : "GPT is summarizing your day..."
+                    }
                 </p>
             </div>
         </header >

@@ -6,6 +6,7 @@ export async function POST(request: Request) {
 
     const response = await openai.createChatCompletion({
         model: "gtp-3.5-turbo",
+        temperature: 0.8,
         n: 1, //number of responses
         stream: false,
         messages: [
@@ -24,7 +25,7 @@ export async function POST(request: Request) {
     const { data } = response;
 
     console.log('openai response: ', data);
-    console.log(data.choices[0].message)
+    console.log(data.choices[0].message);
 
     return NextResponse.json(data.choices[0].message);
 }
