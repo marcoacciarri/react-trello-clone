@@ -49,9 +49,5 @@ export const useBoardStore = create<BoardState>((set, get) => ({
 
     //update board
     set({ board: { columns: newColumns } });
-
-    if (todo.image) {
-
-    }
   }
 }));
