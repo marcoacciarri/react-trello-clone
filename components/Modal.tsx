@@ -1,10 +1,14 @@
 'use client';
 
-import { useState, Fragment } from 'react'
+import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { useModalStore } from '@/store/ModalStore';
 
 function Modal() {
-    let [isOpen, setIsOpen] = useState(true);
+    const [isOpen, closeModal] = useModalStore((state) => [
+        state.isOpen,
+        state.closeModal,
+    ]);
 
     return (
         <Transition
