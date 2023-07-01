@@ -21,7 +21,7 @@ function Modal() {
             leaveTo="transform scale-95 opacity-0"
             as={Fragment}
         >
-            <Dialog onClose={() => setIsOpen(false)}>
+            <Dialog onClose={closeModal}>
                 <Dialog.Panel>
                     <Dialog.Title>Deactivate account</Dialog.Title>
                     {/* ... */}
