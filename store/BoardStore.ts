@@ -13,6 +13,9 @@ interface BoardState {
   searchString: string;
   setSearchString: (searchString: string) => void;
 
+  newTaskInput: string;
+  setNewTaskInput: (newTaskInput: string) => void;
+
   deleteTask: (taskIndex: number, todo: Todo, id: TypedColumn) => void;
 }
 
@@ -39,6 +42,9 @@ export const useBoardStore = create<BoardState>((set, get) => ({
 
   searchString: "",
   setSearchString: (searchString) => set({ searchString }),
+
+  newTaskInput: "",
+  setNewTaskInput: (newTaskInput) => set({ newTaskInput }),
 
   deleteTask: async (taskIndex: number, todo: Todo, id: TypedColumn) => {
     //get copy current state of board
