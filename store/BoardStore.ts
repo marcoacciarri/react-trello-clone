@@ -10,6 +10,9 @@ interface BoardState {
   setBoardState: (board: Board) => void;
   updateTodoInDB: (todo: Todo, columnId: TypedColumn) => void;
 
+  image: File | null;
+  setImage: (image: File | null) => void;
+
   searchString: string;
   setSearchString: (searchString: string) => void;
 
@@ -39,6 +42,9 @@ export const useBoardStore = create<BoardState>((set, get) => ({
       }
     )
   },
+
+  image: null,
+  setImage: (image: File | null) => set({ image }),
 
   searchString: "",
   setSearchString: (searchString) => set({ searchString }),
