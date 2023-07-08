@@ -53,7 +53,7 @@ function TaskTypeRadioGroup() {
                                         ? `${type.color} bg-opacity-75 text-white`
                                         : "bg-white"
                                     }
-                                     relative flex cursor-pointer rounded-lg px-5 
+                                     relative flex cursor-pointer rounded-lg px-5 py-2 
                                     `
                                 }
                             >

@@ -4,7 +4,7 @@ import { Dialog } from '@headlessui/react'
 import { useModalStore } from '@/store/ModalStore';
 import { useBoardStore } from '@/store/BoardStore';
 import TaskTypeRadioGroup from './TaskTypeRadioGroup';
-import { useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import Image from 'next/image';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 
@@ -16,15 +16,30 @@ function Modal() {
         state.closeModal,
     ]);
 
-    const [image, setImage, newTaskInput, setNewTaskInput] = useBoardStore((state) => [
+    const [addTask, image, setImage, newTaskInput, setNewTaskInput, newTaskType] = useBoardStore((state) => [
+        state.addTask,
         state.image,
         state.setImage,
         state.newTaskInput,
         state.setNewTaskInput,
+        state.newTaskType
     ]);
 
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!newTaskInput) return;
+
+        addTask(newTaskInput, newTaskType, image);
+
+        setImage(null);
+        closeModal();
+    }
+
     return (
-        <Dialog open={isOpen} onClose={closeModal}>
+        <Dialog
+            as="form"
+            onSubmit={handleSubmit}
+            open={isOpen} onClose={closeModal}>
             <div className='fixed inset-0 overflow-y-auto'>
                 <div className='flex min-h-full items-center justify-center p-4 text-center'>
                     <Dialog.Panel className='w-full max-w-md overflow-hidden rounded-2xl bg-white p-6 text-left aling-middle shadow-xl transition-all'>
@@ -44,7 +59,9 @@ function Modal() {
                         </div>
 
                         <TaskTypeRadioGroup />
-                        <div>
+
+                        <div
+                            className='mt-2'>
                             <button
                                 type="button"
                                 className='w-full border border-gray-300 rounded-md outline-none p-5 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 text-gray-500'
@@ -82,16 +99,15 @@ function Modal() {
                             />
                         </div>
 
-                        <Dialog.Description>
-                            This will permanently deactivate your account
-                        </Dialog.Description>
-
-                        <p>
-                            Are you sure you want to deactivate your account? All of your data
-                            will be permanently removed. This action cannot be undone.
-                        </p>
-
-                        <button onClick={closeModal}>Cancel</button>
+                        <div className='mt-4'>
+                            <button
+                                type="submit"
+                                disabled={!newTaskInput}
+                                className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-gray-200 disabled:text-gray-300 disabled:cursor-not-allowed'
+                                onClick={closeModal}>
+                                Add Task
+                            </button>
+                        </div>
                     </Dialog.Panel>
                 </div>
             </div>
