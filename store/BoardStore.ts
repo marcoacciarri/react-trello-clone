@@ -1,7 +1,5 @@
 import { databases, storage } from '@/appwrite';
 import { getTodosGroupedByColumn } from '@/lib/getTodosGroupedByColumn';
-import { data } from 'autoprefixer';
-import { todo } from 'node:test';
 import { create } from 'zustand'
 
 interface BoardState {
@@ -18,6 +16,9 @@ interface BoardState {
 
   newTaskInput: string;
   setNewTaskInput: (newTaskInput: string) => void;
+
+  newTaskType: TypedColumn;
+  setNewTaskType: (columnId: TypedColumn) => void;
 
   deleteTask: (taskIndex: number, todo: Todo, id: TypedColumn) => void;
 }
@@ -51,6 +52,9 @@ export const useBoardStore = create<BoardState>((set, get) => ({
 
   newTaskInput: "",
   setNewTaskInput: (newTaskInput) => set({ newTaskInput }),
+
+  newTaskType: "todo",
+  setNewTaskType: (columnId: TypedColumn) => set({ newTaskType: columnId }),
 
   deleteTask: async (taskIndex: number, todo: Todo, id: TypedColumn) => {
     //get copy current state of board
