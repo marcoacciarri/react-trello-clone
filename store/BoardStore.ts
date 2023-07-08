@@ -1,5 +1,7 @@
 import { databases, storage } from '@/appwrite';
 import { getTodosGroupedByColumn } from '@/lib/getTodosGroupedByColumn';
+import uploadImage from '@/lib/uploadImage';
+import { ID } from 'appwrite';
 import { create } from 'zustand'
 
 interface BoardState {
@@ -19,6 +21,8 @@ interface BoardState {
 
   newTaskType: TypedColumn;
   setNewTaskType: (columnId: TypedColumn) => void;
+
+  addTask: (todo: string, columnId: TypedColumn, image?: File | null) => void;
 
   deleteTask: (taskIndex: number, todo: Todo, id: TypedColumn) => void;
 }
@@ -56,6 +60,69 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   newTaskType: "todo",
   setNewTaskType: (columnId: TypedColumn) => set({ newTaskType: columnId }),
 
+  addTask: async (todo: string, columnId: TypedColumn, image?: File | null) => {
+    let file: Image | undefined;
+
+    // upload image if any
+    if (image) {
+      const fileUploaded = await uploadImage(image);
+
+      if (fileUploaded) {
+        file = {
+          bucketId: fileUploaded.bucketId,
+          fileId: fileUploaded.$id
+        };
+      }
+    }
+
+    // destructure response to get document id
+    const { $id } = await databases.createDocument(
+      process.env.NEXT_PUBLIC_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID!,
+      ID.unique(),
+      {
+        title: todo,
+        status: columnId,
+        ...(file && { image: JSON.stringify(file) })
+      }
+    );
+
+    set({ newTaskInput: "" });
+
+    set((state) => {
+      // creaty copy of board
+      const newColumns = new Map(state.board.columns);
+
+      const newTodo: Todo = {
+        $id,
+        $createdAt: new Date().toISOString(),
+        title: todo,
+        status: columnId,
+        ...(file && { image: file }),
+      }
+
+      // get column in which new todo was entered
+      const column = newColumns.get(columnId);
+
+      // put new todo in column
+      if (!column) {
+        //if column doenst exist, create it and put new todo inside
+        newColumns.set(columnId, {
+          id: columnId,
+          todos: [newTodo],
+        })
+      } else {
+        newColumns.get(columnId)?.todos.push(newTodo);
+      }
+
+      return {
+        board: {
+          columns: newColumns,
+        }
+      }
+    });
+
+  },
   deleteTask: async (taskIndex: number, todo: Todo, id: TypedColumn) => {
     //get copy current state of board
     const newColumns = new Map(get().board.columns);
