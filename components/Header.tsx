@@ -36,14 +36,6 @@ function Header() {
                 <div className="absolute top-0 left-0 w-100 h-96 bg-gradient-to-br from-pink-400 to-blue-400 filter 
                 blur-3xl opacity-50 -z-50 " />
 
-                <Image
-                    src="https://yourzone.website/wp-content/uploads/2021/07/favicon-120x120.png"
-                    alt="Trello clone"
-                    width={120}
-                    height={120}
-                    className='w-38 pb-10 md:pb-0 object-contain'
-                />
-
                 {/* Search box */}
                 <div className="flex items-center space-x-5 flex-1 justify-end w-full ">
                     <form className="flex items-center space-x-5 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial">
