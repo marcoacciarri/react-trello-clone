@@ -63,7 +63,7 @@ function Column({ id, todos, index }: Props) {
                                                         id={id}
                                                         innerRef={provided.innerRef}
                                                         draggableProps={provided.draggableProps}
-                                                        dragHandleProps={provided.dragHandleProps}
+                                                        dragHandleProps={provided.dragHandleProps!}
                                                     />
                                                 )}
                                             </Draggable>
